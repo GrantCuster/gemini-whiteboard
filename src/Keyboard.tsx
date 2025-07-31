@@ -26,6 +26,10 @@ export function Keyboard() {
   useEffect(() => {
     async function handleKeyDown(event: KeyboardEvent) {
       if (event.key === " ") {
+        if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) {
+          // Ignore space key if focused on input or textarea
+          return;
+        }
         event.preventDefault();
         const $video = document.getElementById(
           "webcam-video",

@@ -10,7 +10,7 @@ export function Settings() {
   const [prompt, setPrompt] = useAtom(promptAtom);
 
   return (
-    <div className="w-full h-[100dvh] overflow-auto bg-neutral-900 flex flex-col px-3">
+    <div className="w-full relative h-[100dvh] overflow-auto bg-neutral-900 flex flex-col px-3">
       <div className="px-3 uppercase mb-3 py-8 text-neutral-400">Settings</div>
       <div className="flex gap-3 items-center px-3 mb-3">
         <div>Camera:</div>
