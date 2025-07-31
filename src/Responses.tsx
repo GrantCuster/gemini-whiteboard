@@ -51,29 +51,34 @@ function Response({ id: responseId }: { id: string }) {
     }
   }, [showSentCanvas]);
 
+  const summary =
+    response.text.split("SUMMARY")[1]?.split("APPEARANCE")[0].trim() || "";
+  const transcription = response.text.split("TRANSCRIPTION")[1]?.trim() || "";
+
   return (
     <div
       className="whitespace-pre-wrap text-neutral-200 font-sans"
       key={responseId}
     >
-      <div className="flex justify-between items-center hidden mb-2">
+      <div className="flex justify-between items-center mb-2">
         <div className="text-blue-100">GEMINI</div>
         <div className="text-neutral-200">
           {Math.round(response.elapsedTime / 100) / 10}s
         </div>
       </div>
-      <div
-        className="text-white text-4xl font-bold py-3 px-4"
-        style={{
-          lineHeight: "1.3",
-          backgroundColor: response.text,
-        }}
-      >
-        {response.text ? (
-          <Markdown>{response.text}</Markdown>
-        ) : (
-          <div className="animate-pulse">...</div>
-        )}
+      <div className="text-white py-3">
+        <div>
+          <div className="text-4xl font-bold mb-3">
+            {summary.length > 0 ? (
+              summary
+            ) : (
+              <span className="animate-pulse">...</span>
+            )}
+          </div>
+          <div className="text-xl">
+            {transcription.length > 0 ? transcription : null}
+          </div>
+        </div>
       </div>
       <div>
         {showSentCanvas ? (
