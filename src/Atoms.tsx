@@ -40,4 +40,6 @@ export const showSentCanvasAtom = atomWithStorage<boolean>(
   true,
 );
 
-export const promptAtom = atomWithStorage<string>("prompt", startingPrompt);
+// TODO: revert
+// export const promptAtom = atomWithStorage<string>("prompt", startingPrompt);
+export const promptAtom = atom<string>(startingPrompt);

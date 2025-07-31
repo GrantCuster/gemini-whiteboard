@@ -16,15 +16,17 @@ export function Responses() {
   }, [responseMap]);
 
   return responseIds.length > 0 ? (
-    <div
-      className="p-8 flex flex-col gap-8 overflow-auto w-full"
-      ref={scrollRef}
-    >
+    <>
       <div className="h-8 shrink-0 w-full"></div>
-      {responseIds.map((responseId) => (
-        <Response id={responseId} key={responseId} />
-      ))}
-    </div>
+      <div
+        className="p-8 flex flex-col-reverse gap-8 overflow-auto w-full"
+        ref={scrollRef}
+      >
+        {responseIds.map((responseId) => (
+          <Response id={responseId} key={responseId} />
+        ))}
+      </div>
+    </>
   ) : null;
 }
 
@@ -54,17 +56,24 @@ function Response({ id: responseId }: { id: string }) {
       className="whitespace-pre-wrap text-neutral-200 font-sans"
       key={responseId}
     >
-      <div className="flex justify-between items-center mb-2">
+      <div className="flex justify-between items-center hidden mb-2">
         <div className="text-blue-100">GEMINI</div>
         <div className="text-neutral-200">
           {Math.round(response.elapsedTime / 100) / 10}s
         </div>
       </div>
       <div
-        className="text-white text-4xl font-bold"
-        style={{ lineHeight: "1.3" }}
+        className="text-white text-4xl font-bold py-3 px-4"
+        style={{
+          lineHeight: "1.3",
+          backgroundColor: response.text,
+        }}
       >
-        {response.text ? <Markdown>{response.text}</Markdown> : <div className="animate-pulse">...</div>}
+        {response.text ? (
+          <Markdown>{response.text}</Markdown>
+        ) : (
+          <div className="animate-pulse">...</div>
+        )}
       </div>
       <div>
         {showSentCanvas ? (
